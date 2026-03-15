@@ -2,20 +2,48 @@
   "timezone": "Asia/Tokyo",
   "runs": [
     {
-      "name": "morning-run",
-      "time": "08:30",
-      "cron": "30 8 * * *"
+      "name": "rent-portals",
+      "time": "06:00",
+      "cron": "0 6 * * *",
+      "scope": "Phase 2 rent portals"
     },
     {
-      "name": "midday-run",
-      "time": "12:30",
-      "cron": "30 12 * * *"
+      "name": "akiya-banks-and-national-portals",
+      "time": "08:00",
+      "cron": "0 8 * * *",
+      "scope": "Akiya banks + national portals"
     },
     {
-      "name": "evening-run",
-      "time": "20:30",
-      "cron": "30 20 * * *"
+      "name": "national-portals-second-pass",
+      "time": "20:00",
+      "cron": "0 20 * * *",
+      "scope": "National portals second pass"
+    },
+    {
+      "name": "export-and-push",
+      "time": "21:00",
+      "cron": "0 21 * * *",
+      "scope": "Export -> git push (once per day)"
+    },
+    {
+      "name": "subsidy-weekly-check",
+      "time": "09:00",
+      "cron": "0 9 * * 1",
+      "scope": "Weekly subsidy check (every Monday)"
+    },
+    {
+      "name": "new-source-discovery",
+      "time": "03:00",
+      "cron": "0 3 * * 0",
+      "scope": "Weekly new source discovery (every Sunday)"
+    },
+    {
+      "name": "fiscal-year-subsidy-daily",
+      "time": "09:30",
+      "cron": "30 9 * 3,4 *",
+      "scope": "Daily subsidy checks during fiscal-year turnover",
+      "window": "03-01 to 04-30 (add month/day guard in job wrapper)"
     }
   ],
-  "notes": "3 daily runs at 08:30/12:30/20:30 JST. Use these times when wiring cron or OpenClaw scheduler jobs. See scripts/run-crawl.sh for the full automation sequence."
+  "notes": "Operational schedule requested by user: 06:00 rent portals, 08:00 akiya banks + national portals, 20:00 national portals second pass, 21:00 export+push once daily, Monday 09:00 subsidies, Sunday 03:00 discovery, plus daily subsidy checks during 03-01 to 04-30 with an extra date guard."
 }

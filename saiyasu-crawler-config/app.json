@@ -67,8 +67,16 @@
     "require_building": false
   },
   "schedule": {
-    "times": ["08:30", "12:30", "20:30"],
-    "timezone": "Asia/Tokyo"
+    "timezone": "Asia/Tokyo",
+    "runs": [
+      { "name": "rent-portals", "time": "06:00", "cron": "0 6 * * *", "scope": "phase2_rent_portals" },
+      { "name": "akiya-banks-and-national-portals", "time": "08:00", "cron": "0 8 * * *", "scope": "akiya_banks_and_national_portals" },
+      { "name": "national-portals-second-pass", "time": "20:00", "cron": "0 20 * * *", "scope": "national_portals_second_pass" },
+      { "name": "export-and-push", "time": "21:00", "cron": "0 21 * * *", "scope": "export_git_push" },
+      { "name": "subsidy-weekly-check", "time": "09:00", "cron": "0 9 * * 1", "scope": "subsidy_weekly" },
+      { "name": "new-source-discovery", "time": "03:00", "cron": "0 3 * * 0", "scope": "source_discovery_weekly" },
+      { "name": "fiscal-year-subsidy-daily", "time": "09:30", "cron": "30 9 * 3,4 *", "scope": "subsidy_fiscal_year_daily", "window": "03-01 to 04-30 (needs month/day guard)" }
+    ]
   },
   "discord": {
     "enabled": true,
