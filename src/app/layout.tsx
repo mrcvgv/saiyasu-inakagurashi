@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | 掘り出し物件ラボ",
   },
   description:
-    "格安で土地・物件・賃貸を見つける研究所。0円〜1000万円の掘り出し物件を全国のポータルから横断検索。空き家バンク・移住補助金情報も。",
+    "格安で土地・物件・賃貸を見つける研究所。0円〜1000万円の掘り出し物件を全国のポータルから横断検索。空き家バンク・DIYリノベ・移住補助金情報も。",
 };
 
 export default function RootLayout({

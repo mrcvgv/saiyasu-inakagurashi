@@ -88,7 +88,7 @@ export default function Home() {
           格安で土地・物件・賃貸を見つける
         </h1>
         <p className="mt-3 text-lg text-green-100">
-          0円物件 / 空き家 / 格安賃貸 / 地方移住 — 全国のポータルを横断検索
+          0円物件 / 空き家 / DIYリノベ / 格安賃貸 / 地方移住 — 全国横断検索
         </p>
 
         {/* 検索UI */}
