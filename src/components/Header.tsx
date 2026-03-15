@@ -7,18 +7,27 @@ export default function Header() {
         <Link href="/" className="text-xl font-bold text-green-700">
           最安田舎暮らし
         </Link>
-        <nav className="flex gap-6 text-sm">
+        <nav className="hidden gap-5 text-sm sm:flex">
+          <Link href="/cheap-land" className="hover:text-green-700">
+            格安土地
+          </Link>
+          <Link href="/akiya" className="hover:text-green-700">
+            空き家
+          </Link>
+          <Link href="/cheap-rent" className="hover:text-green-700">
+            格安賃貸
+          </Link>
           <Link href="/search" className="hover:text-green-700">
-            物件検索
+            検索
           </Link>
-          <Link href="/listings" className="hover:text-green-700">
-            物件一覧
+          <Link href="/guide" className="hover:text-green-700">
+            移住ガイド
           </Link>
-          <Link href="/cheap" className="hover:text-green-700">
-            激安物件
-          </Link>
-          <Link href="/subsidy" className="hover:text-green-700">
-            移住補助金
+          <Link
+            href="/consult"
+            className="rounded bg-green-700 px-3 py-1 text-white hover:bg-green-800"
+          >
+            無料相談
           </Link>
         </nav>
       </div>
