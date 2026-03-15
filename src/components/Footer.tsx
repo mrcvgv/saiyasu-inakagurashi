@@ -45,7 +45,7 @@ export default function Footer() {
           </div>
         </div>
         <p className="mt-8 text-center text-xs text-gray-400">
-          &copy; 2025 最安田舎暮らし
+          &copy; 2026 最安田舎暮らし
         </p>
       </div>
     </footer>
