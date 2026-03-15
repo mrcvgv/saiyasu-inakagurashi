@@ -12,7 +12,7 @@ const CATEGORIES = [
   },
   {
     title: "激安物件",
-    description: "0円〜100万円の超低価格物件",
+    description: "0円〜1000万円の格安物件",
     href: "/cheap",
     color: "bg-orange-50 border-orange-200",
   },
@@ -28,6 +28,8 @@ const PRICE_LINKS = [
   { label: "0円物件", href: "/search?minPrice=0&maxPrice=0" },
   { label: "〜50万円", href: "/search?maxPrice=500000" },
   { label: "50万〜100万円", href: "/search?minPrice=500000&maxPrice=1000000" },
+  { label: "100万〜500万円", href: "/search?minPrice=1000000&maxPrice=5000000" },
+  { label: "500万〜1000万円", href: "/search?minPrice=5000000&maxPrice=10000000" },
 ];
 
 const REGION_LINKS = [
@@ -51,7 +53,7 @@ export default function Home() {
           最安田舎暮らし
         </h1>
         <p className="mt-3 text-lg text-gray-600">
-          全国の0円〜格安物件を探せるポータルサイト
+          全国の0円〜1000万円の物件を探せるポータルサイト
         </p>
         <Link
           href="/search"

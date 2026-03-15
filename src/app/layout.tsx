@@ -16,11 +16,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "最安田舎暮らし — 0円〜格安田舎物件ポータル",
+    default: "最安田舎暮らし — 0円〜1000万円の田舎物件ポータル",
     template: "%s | 最安田舎暮らし",
   },
   description:
-    "全国の0円〜低価格帯の田舎物件を検索・比較できるポータルサイト。空き家バンク・自治体情報を集約。移住補助金情報も。",
+    "全国の0円〜1000万円の田舎物件を安く買えるポータルサイト。空き家バンク・自治体情報を集約。移住補助金情報も。",
 };
 
 export default function RootLayout({

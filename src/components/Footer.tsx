@@ -8,7 +8,7 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-green-700">最安田舎暮らし</h3>
             <p className="mt-2 text-sm text-gray-600">
-              全国の0円〜低価格帯の田舎物件を探せるポータルサイト
+              全国の0円〜1000万円の田舎物件を安く買えるポータルサイト
             </p>
           </div>
           <div>
