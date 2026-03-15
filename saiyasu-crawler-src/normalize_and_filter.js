@@ -9,17 +9,56 @@ function readJson(filePath) {
 function normalizePrefecture(value) {
   if (!value) return null;
   const compact = value.trim();
+
+  // All 47 prefectures: short form → canonical form
   const map = new Map([
-    ['東京', '東京都'],
-    ['東京都', '東京都'],
-    ['神奈川', '神奈川県'],
-    ['神奈川県', '神奈川県'],
-    ['千葉', '千葉県'],
-    ['千葉県', '千葉県'],
-    ['埼玉', '埼玉県'],
-    ['埼玉県', '埼玉県'],
-    ['長野', '長野県'],
-    ['長野県', '長野県']
+    ['北海道', '北海道'],
+    ['青森', '青森県'], ['青森県', '青森県'],
+    ['岩手', '岩手県'], ['岩手県', '岩手県'],
+    ['宮城', '宮城県'], ['宮城県', '宮城県'],
+    ['秋田', '秋田県'], ['秋田県', '秋田県'],
+    ['山形', '山形県'], ['山形県', '山形県'],
+    ['福島', '福島県'], ['福島県', '福島県'],
+    ['茨城', '茨城県'], ['茨城県', '茨城県'],
+    ['栃木', '栃木県'], ['栃木県', '栃木県'],
+    ['群馬', '群馬県'], ['群馬県', '群馬県'],
+    ['埼玉', '埼玉県'], ['埼玉県', '埼玉県'],
+    ['千葉', '千葉県'], ['千葉県', '千葉県'],
+    ['東京', '東京都'], ['東京都', '東京都'],
+    ['神奈川', '神奈川県'], ['神奈川県', '神奈川県'],
+    ['新潟', '新潟県'], ['新潟県', '新潟県'],
+    ['富山', '富山県'], ['富山県', '富山県'],
+    ['石川', '石川県'], ['石川県', '石川県'],
+    ['福井', '福井県'], ['福井県', '福井県'],
+    ['山梨', '山梨県'], ['山梨県', '山梨県'],
+    ['長野', '長野県'], ['長野県', '長野県'],
+    ['岐阜', '岐阜県'], ['岐阜県', '岐阜県'],
+    ['静岡', '静岡県'], ['静岡県', '静岡県'],
+    ['愛知', '愛知県'], ['愛知県', '愛知県'],
+    ['三重', '三重県'], ['三重県', '三重県'],
+    ['滋賀', '滋賀県'], ['滋賀県', '滋賀県'],
+    ['京都', '京都府'], ['京都府', '京都府'],
+    ['大阪', '大阪府'], ['大阪府', '大阪府'],
+    ['兵庫', '兵庫県'], ['兵庫県', '兵庫県'],
+    ['奈良', '奈良県'], ['奈良県', '奈良県'],
+    ['和歌山', '和歌山県'], ['和歌山県', '和歌山県'],
+    ['鳥取', '鳥取県'], ['鳥取県', '鳥取県'],
+    ['島根', '島根県'], ['島根県', '島根県'],
+    ['岡山', '岡山県'], ['岡山県', '岡山県'],
+    ['広島', '広島県'], ['広島県', '広島県'],
+    ['山口', '山口県'], ['山口県', '山口県'],
+    ['徳島', '徳島県'], ['徳島県', '徳島県'],
+    ['香川', '香川県'], ['香川県', '香川県'],
+    ['愛媛', '愛媛県'], ['愛媛県', '愛媛県'],
+    ['高知', '高知県'], ['高知県', '高知県'],
+    ['福岡', '福岡県'], ['福岡県', '福岡県'],
+    ['佐賀', '佐賀県'], ['佐賀県', '佐賀県'],
+    ['長崎', '長崎県'], ['長崎県', '長崎県'],
+    ['熊本', '熊本県'], ['熊本県', '熊本県'],
+    ['大分', '大分県'], ['大分県', '大分県'],
+    ['宮崎', '宮崎県'], ['宮崎県', '宮崎県'],
+    ['鹿児島', '鹿児島県'], ['鹿児島県', '鹿児島県'],
+    ['沖縄', '沖縄県'], ['沖縄県', '沖縄県']
   ]);
 
   if (map.has(compact)) return map.get(compact);
@@ -71,6 +110,22 @@ function buildHashSignature(property) {
   return `sha256:${crypto.createHash('sha256').update(JSON.stringify(payload)).digest('hex')}`;
 }
 
+function inferListingType(property, priceYen) {
+  if (property.listing_type) return property.listing_type;
+  if (priceYen === 0) return 'free';
+  if (property.monthly_rent || /月額|賃料|家賃/.test(property.price_raw || '')) return 'rent';
+  return 'sale';
+}
+
+function inferCategory(property, listingType, isAkiya) {
+  if (property.category) return property.category;
+  if (listingType === 'free') return 'free_property';
+  if (isAkiya) return 'akiya_bank';
+  if (listingType === 'rent') return 'cheap_rent';
+  if (property.building_age && property.building_age >= 50) return 'kominka';
+  return 'general';
+}
+
 function normalizeProperty(property) {
   const normalizedNotes = normalizeAkiyaText(property.notes || '');
   const normalizedTitle = normalizeAkiyaText(property.title || '');
@@ -78,6 +133,8 @@ function normalizeProperty(property) {
   const priceYen = normalizePriceYen(property.price_yen, property.price_raw);
   const isAkiya = Boolean(property.is_akiya) || /空き家/.test(`${normalizedTitle} ${normalizedNotes} ${property.status_text || ''}`);
   const hasBuilding = Boolean(property.has_building) || Boolean(property.building_area_sqm) || /戸建|家屋|住宅|古民家|建物/.test(`${normalizedTitle} ${normalizedNotes}`);
+  const listingType = inferListingType(property, priceYen);
+  const category = inferCategory(property, listingType, isAkiya);
 
   const normalized = {
     canonical_id: null,
@@ -88,6 +145,8 @@ function normalizeProperty(property) {
     city: property.city || null,
     address_raw: property.address_raw || null,
     price_yen: priceYen,
+    listing_type: listingType,
+    category,
     is_akiya: isAkiya,
     has_building: hasBuilding,
     layout: property.layout || null,
@@ -99,6 +158,7 @@ function normalizeProperty(property) {
     image_urls: property.image_urls || [],
     inquiry_code: property.inquiry_code || null,
     status_text: property.status_text || null,
+    sources: property.sources || [{ portalName: property.source || null, portalUrl: property.url || null }],
     exclude_reason: null,
     hash_signature: null,
     scraped_at: property.scraped_at || new Date().toISOString()
@@ -194,5 +254,7 @@ module.exports = {
   normalizePriceYen,
   normalizeAkiyaText,
   buildHashSignature,
-  decideExcludeReason
+  decideExcludeReason,
+  inferListingType,
+  inferCategory
 };

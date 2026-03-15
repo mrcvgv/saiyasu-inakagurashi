@@ -1,0 +1,147 @@
+{
+  "_meta": {
+    "description": "全国移住補助金レジストリ — 市区町村別の移住・定住支援制度管理",
+    "updated_at": "2026-03-16",
+    "total_entries": 6,
+    "total_planned_prefectures": 47,
+    "coverage_notes": "Phase 3 scaffold. Seed data from src/data/subsidies.ts. Nationwide collection pending — requires web_search per prefecture per municipality. Target: ~1,740 municipalities.",
+    "categories": [
+      "migration_support",
+      "housing_acquisition",
+      "akiya_renovation",
+      "rent_subsidy",
+      "childrearing",
+      "entrepreneurship",
+      "telework",
+      "farming_support"
+    ],
+    "collection_status": {
+      "wave_1": { "prefectures": ["北海道", "長野県", "千葉県", "茨城県", "栃木県", "群馬県", "新潟県"], "status": "pending" },
+      "wave_2": { "prefectures": ["秋田県", "山形県", "岩手県", "福島県", "青森県", "宮城県"], "status": "pending" },
+      "wave_3": { "prefectures": ["高知県", "愛媛県", "徳島県", "香川県"], "status": "pending" },
+      "wave_4": { "prefectures": ["大分県", "鹿児島県", "宮崎県", "熊本県", "佐賀県", "長崎県", "福岡県"], "status": "pending" },
+      "wave_5": { "prefectures": ["島根県", "山口県", "鳥取県", "岡山県", "広島県"], "status": "pending" },
+      "wave_6": { "prefectures": ["富山県", "石川県", "福井県", "岐阜県", "山梨県", "静岡県"], "status": "pending" },
+      "wave_7": { "prefectures": ["和歌山県", "奈良県", "三重県", "滋賀県", "京都府", "兵庫県"], "status": "pending" },
+      "wave_8": { "prefectures": ["埼玉県", "神奈川県", "東京都", "愛知県", "大阪府", "沖縄県"], "status": "pending" }
+    },
+    "national_programs": [
+      {
+        "title": "地方創生移住支援事業",
+        "max_amount": 1000000,
+        "amount_text": "単身60万円、世帯100万円（18歳未満の子1人につき100万円加算）",
+        "conditions": "東京23区在住/通勤者が地方に移住",
+        "source_url": "https://www.chisou.go.jp/sousei/ijyu_shienkin.html",
+        "fiscal_year": "2026",
+        "notes": "対象自治体は約1,300市区町村"
+      },
+      {
+        "title": "地方創生起業支援事業",
+        "max_amount": 2000000,
+        "amount_text": "最大200万円",
+        "conditions": "地方で社会的事業を起業",
+        "source_url": "https://www.chisou.go.jp/sousei/ijyu_shienkin.html",
+        "fiscal_year": "2026",
+        "notes": "移住支援金と併用可能"
+      }
+    ]
+  },
+  "subsidies": [
+    {
+      "id": "sub_nagano_iiyama_migration",
+      "prefecture": "長野県",
+      "city": "飯山市",
+      "title": "飯山市移住支援金",
+      "category": "migration_support",
+      "amount_text": "単身60万円、世帯100万円",
+      "max_amount": 1000000,
+      "conditions": "東京23区在住または通勤者、5年以上居住の意思",
+      "eligibility": "転入前に東京圏に5年以上在住",
+      "application_period": "通年（予算上限あり）",
+      "source_url": "https://www.city.iiyama.nagano.jp/",
+      "is_active": true,
+      "fiscal_year": "2026",
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "id": "sub_kochi_shimanto_migration",
+      "prefecture": "高知県",
+      "city": "四万十市",
+      "title": "四万十市移住奨励金",
+      "category": "akiya_renovation",
+      "amount_text": "最大150万円（改修費補助含む）",
+      "max_amount": 1500000,
+      "conditions": "空き家バンク登録物件の購入、5年以上の定住意思",
+      "eligibility": "空き家バンク物件購入者",
+      "application_period": null,
+      "source_url": "https://www.city.shimanto.lg.jp/",
+      "is_active": true,
+      "fiscal_year": "2026",
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "id": "sub_hokkaido_fukagawa_housing",
+      "prefecture": "北海道",
+      "city": "深川市",
+      "title": "深川市定住促進助成金",
+      "category": "housing_acquisition",
+      "amount_text": "最大50万円",
+      "max_amount": 500000,
+      "conditions": "市内に住宅を取得し、10年以上定住する意思があること",
+      "eligibility": "住宅取得者",
+      "application_period": null,
+      "source_url": "https://www.city.fukagawa.lg.jp/",
+      "is_active": true,
+      "fiscal_year": "2026",
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "id": "sub_chiba_minamiboso_akiya",
+      "prefecture": "千葉県",
+      "city": "南房総市",
+      "title": "南房総市空き家活用補助金",
+      "category": "akiya_renovation",
+      "amount_text": "最大200万円（改修費の1/2）",
+      "max_amount": 2000000,
+      "conditions": "空き家バンク物件の購入者、改修後5年以上居住",
+      "eligibility": "空き家バンク物件購入者",
+      "application_period": null,
+      "source_url": "https://www.city.minamiboso.chiba.jp/",
+      "is_active": true,
+      "fiscal_year": "2026",
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "id": "sub_akita_yokote_migration",
+      "prefecture": "秋田県",
+      "city": "横手市",
+      "title": "横手市移住・定住促進事業",
+      "category": "migration_support",
+      "amount_text": "最大120万円（子育て加算含む）",
+      "max_amount": 1200000,
+      "conditions": "市外からの転入者、3年以上定住の意思",
+      "eligibility": "市外からの転入者",
+      "application_period": null,
+      "source_url": "https://www.city.yokote.lg.jp/",
+      "is_active": true,
+      "fiscal_year": "2026",
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "id": "sub_oita_taketa_akiya",
+      "prefecture": "大分県",
+      "city": "竹田市",
+      "title": "竹田市移住者住宅改修支援",
+      "category": "akiya_renovation",
+      "amount_text": "最大100万円",
+      "max_amount": 1000000,
+      "conditions": "空き家バンク物件の活用、移住後3年以上の定住",
+      "eligibility": "空き家バンク物件利用の移住者",
+      "application_period": null,
+      "source_url": "https://www.city.taketa.oita.jp/",
+      "is_active": true,
+      "fiscal_year": "2026",
+      "discovered_at": "2026-03-16"
+    }
+  ]
+}

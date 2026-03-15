@@ -1,0 +1,734 @@
+{
+  "_meta": {
+    "description": "全国空き家バンクレジストリ — 自治体運営の空き家バンクURL・ステータス管理",
+    "updated_at": "2026-03-16",
+    "total_discovered": 62,
+    "total_live": 10,
+    "total_planned": 44,
+    "total_blocked": 3,
+    "coverage_notes": "Phase 1 registry scaffold. Known live banks from sources.json + discovered prefecture-level aggregator portals. Municipality-level discovery pending for all 47 prefectures.",
+    "discovery_waves": [
+      { "wave": 1, "prefectures": ["北海道", "長野県", "千葉県", "茨城県", "栃木県", "群馬県", "新潟県"], "status": "pending" },
+      { "wave": 2, "prefectures": ["秋田県", "山形県", "岩手県", "福島県", "青森県", "宮城県"], "status": "pending" },
+      { "wave": 3, "prefectures": ["高知県", "愛媛県", "徳島県", "香川県"], "status": "pending" },
+      { "wave": 4, "prefectures": ["大分県", "鹿児島県", "宮崎県", "熊本県", "佐賀県", "長崎県", "福岡県"], "status": "pending" },
+      { "wave": 5, "prefectures": ["島根県", "山口県", "鳥取県", "岡山県", "広島県"], "status": "pending" },
+      { "wave": 6, "prefectures": ["富山県", "石川県", "福井県", "岐阜県", "山梨県", "静岡県"], "status": "pending" },
+      { "wave": 7, "prefectures": ["和歌山県", "奈良県", "三重県", "滋賀県", "京都府", "兵庫県"], "status": "pending" },
+      { "wave": 8, "prefectures": ["埼玉県", "神奈川県", "東京都", "愛知県", "大阪府", "沖縄県"], "status": "pending" }
+    ]
+  },
+  "prefecture_aggregators": [
+    {
+      "prefecture": "北海道",
+      "aggregator_name": "北海道空き家情報バンク",
+      "aggregator_url": "https://www.hokkaido-akiya.com/",
+      "status": "discovered",
+      "discovered_at": "2026-03-16",
+      "notes": "Prefecture-level aggregator. Municipality-level discovery pending."
+    },
+    {
+      "prefecture": "長野県",
+      "aggregator_name": "楽園信州空き家バンク",
+      "aggregator_url": "https://www.rakuen-shinsyu.jp/",
+      "status": "discovered",
+      "discovered_at": "2026-03-16",
+      "notes": "Prefecture aggregator covering 77 municipalities. Known individual banks: 佐久市(39ijyu.com), 佐久穂町(town.sakuho.nagano.jp)."
+    },
+    {
+      "prefecture": "高知県",
+      "aggregator_name": "高知家で暮らす",
+      "aggregator_url": "https://kochi-iju.jp/",
+      "status": "discovered",
+      "discovered_at": "2026-03-16",
+      "notes": "Prefecture migration portal with akiya bank links."
+    },
+    {
+      "prefecture": "秋田県",
+      "aggregator_name": "秋田県空き家バンク",
+      "aggregator_url": "https://www.a-iju.jp/akiya/",
+      "status": "discovered",
+      "discovered_at": "2026-03-16",
+      "notes": "Prefecture aggregator for akiya banks."
+    },
+    {
+      "prefecture": "新潟県",
+      "aggregator_name": "にいがた暮らし",
+      "aggregator_url": "https://niigatakurashi.com/house/",
+      "status": "discovered",
+      "discovered_at": "2026-03-16",
+      "notes": "Prefecture migration portal with property search."
+    },
+    {
+      "prefecture": "広島県",
+      "aggregator_name": "広島県空き家バンク",
+      "aggregator_url": "https://www.hiroshima-akiya.jp/",
+      "status": "discovered",
+      "discovered_at": "2026-03-16",
+      "notes": "Prefecture aggregator."
+    },
+    {
+      "prefecture": "大分県",
+      "aggregator_name": "おおいた暮らし",
+      "aggregator_url": "https://www.iju-oita.jp/",
+      "status": "discovered",
+      "discovered_at": "2026-03-16",
+      "notes": "Prefecture migration portal."
+    },
+    {
+      "prefecture": "千葉県",
+      "aggregator_name": "千葉県空き家バンク",
+      "aggregator_url": null,
+      "status": "pending",
+      "discovered_at": "2026-03-16",
+      "notes": "No single prefecture aggregator known. Individual municipal banks tracked separately."
+    },
+    {
+      "prefecture": "埼玉県",
+      "aggregator_name": null,
+      "aggregator_url": null,
+      "status": "pending",
+      "discovered_at": "2026-03-16",
+      "notes": "No single prefecture aggregator. Regional portal saihoku covers 7 north-Saitama municipalities."
+    }
+  ],
+  "banks": [
+    {
+      "prefecture": "神奈川県",
+      "city": "山北町",
+      "akiya_bank_url": "https://www.town.yamakita.kanagawa.jp/category/13-1-2-0-0.html",
+      "domain_type": "lg_jp",
+      "source_name": "yamakita_akiya",
+      "status": "live",
+      "parser_type": "custom",
+      "discovered_at": "2026-03-01"
+    },
+    {
+      "prefecture": "埼玉県",
+      "city": "飯能市",
+      "akiya_bank_url": "https://www.city.hanno.lg.jp/kurashi_seikatsukankyo/akiya_reform/akiyabank/3962.html",
+      "domain_type": "lg_jp",
+      "source_name": "hanno_akiya",
+      "status": "live",
+      "parser_type": "custom_pdf",
+      "discovered_at": "2026-03-01"
+    },
+    {
+      "prefecture": "長野県",
+      "city": "佐久市",
+      "akiya_bank_url": "https://39ijyu.com/all.php?kubun=IE",
+      "domain_type": "external_portal",
+      "source_name": "saku_akiya",
+      "status": "live",
+      "parser_type": "custom",
+      "discovered_at": "2026-03-01"
+    },
+    {
+      "prefecture": "千葉県",
+      "city": "鴨川市",
+      "akiya_bank_url": "https://www.city.kamogawa.lg.jp/site/iju/list34-104.html",
+      "domain_type": "lg_jp",
+      "source_name": "kamogawa_akiya",
+      "status": "live",
+      "parser_type": "custom",
+      "discovered_at": "2026-03-01"
+    },
+    {
+      "prefecture": "埼玉県",
+      "city": "秩父地域",
+      "akiya_bank_url": "https://www.chichibuakiyabank.com/",
+      "domain_type": "external_portal",
+      "source_name": "chichibu_akiya",
+      "status": "live",
+      "parser_type": "custom",
+      "discovered_at": "2026-03-01"
+    },
+    {
+      "prefecture": "千葉県",
+      "city": "南房総市",
+      "akiya_bank_url": "https://www.minamibosocity-iju.jp/guide/house/vacant/",
+      "domain_type": "external_portal",
+      "source_name": "minamiboso_akiya",
+      "status": "live",
+      "parser_type": "custom",
+      "discovered_at": "2026-03-01"
+    },
+    {
+      "prefecture": "長野県",
+      "city": "佐久穂町",
+      "akiya_bank_url": "https://www.town.sakuho.nagano.jp/iju/live/index.html",
+      "domain_type": "lg_jp",
+      "source_name": "sakuho_akiya",
+      "status": "live",
+      "parser_type": "custom",
+      "discovered_at": "2026-03-15"
+    },
+    {
+      "prefecture": "埼玉県",
+      "city": "埼北地域（熊谷/本庄/深谷/美里/神川/上里/寄居）",
+      "akiya_bank_url": "https://akiyabank.saihoku-ijuu.com/",
+      "domain_type": "external_portal",
+      "source_name": "saihoku",
+      "status": "live",
+      "parser_type": "custom",
+      "discovered_at": "2026-03-15"
+    },
+    {
+      "prefecture": "埼玉県",
+      "city": "ときがわ町",
+      "akiya_bank_url": "https://www.town.tokigawa.lg.jp/info/1012",
+      "domain_type": "lg_jp",
+      "source_name": "tokigawa_akiya",
+      "status": "live",
+      "parser_type": "custom",
+      "discovered_at": "2026-03-15"
+    },
+    {
+      "prefecture": "全国",
+      "city": null,
+      "akiya_bank_url": "https://www.ieichiba.com/",
+      "domain_type": "external_portal",
+      "source_name": "ieichiba",
+      "status": "live",
+      "parser_type": "custom",
+      "discovered_at": "2026-03-01",
+      "notes": "National akiya marketplace, not a municipal bank but covers municipal listings."
+    },
+    {
+      "prefecture": "全国",
+      "city": null,
+      "akiya_bank_url": "https://www.akiya-athome.jp/",
+      "domain_type": "external_portal",
+      "source_name": "athome_akiya",
+      "status": "blocked",
+      "parser_type": null,
+      "discovered_at": "2026-03-16",
+      "notes": "HTTP 403 to automated requests. Needs browser automation."
+    },
+    {
+      "prefecture": "全国",
+      "city": null,
+      "akiya_bank_url": "https://akiya-gateway.jp/",
+      "domain_type": "external_portal",
+      "source_name": "akiya_gateway",
+      "status": "blocked",
+      "parser_type": null,
+      "discovered_at": "2026-03-16",
+      "notes": "DNS does not resolve. Site may be defunct."
+    },
+    {
+      "prefecture": "全国",
+      "city": null,
+      "akiya_bank_url": "https://www.homes.co.jp/akiyabank/",
+      "domain_type": "external_portal",
+      "source_name": "lifull_akiyabank",
+      "status": "blocked",
+      "parser_type": null,
+      "discovered_at": "2026-03-16",
+      "notes": "HTTP 403. Browser automation required."
+    },
+    {
+      "prefecture": "北海道",
+      "city": "深川市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16",
+      "notes": "Known to have akiya bank. URL discovery pending."
+    },
+    {
+      "prefecture": "北海道",
+      "city": "夕張市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16",
+      "notes": "Known to have akiya bank. URL discovery pending."
+    },
+    {
+      "prefecture": "北海道",
+      "city": "三笠市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16",
+      "notes": "Known to have akiya bank. URL discovery pending."
+    },
+    {
+      "prefecture": "秋田県",
+      "city": "横手市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "秋田県",
+      "city": "大仙市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "秋田県",
+      "city": "仙北市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "長野県",
+      "city": "飯山市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "長野県",
+      "city": "小諸市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "長野県",
+      "city": "上田市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "長野県",
+      "city": "松本市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "長野県",
+      "city": "安曇野市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "千葉県",
+      "city": "館山市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "千葉県",
+      "city": "いすみ市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "千葉県",
+      "city": "勝浦市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "茨城県",
+      "city": "常陸太田市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "茨城県",
+      "city": "笠間市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "栃木県",
+      "city": "那須塩原市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "群馬県",
+      "city": "みなかみ町",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "新潟県",
+      "city": "佐渡市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "新潟県",
+      "city": "十日町市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "高知県",
+      "city": "四万十市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "高知県",
+      "city": "土佐清水市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "広島県",
+      "city": "尾道市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "広島県",
+      "city": "三次市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "大分県",
+      "city": "竹田市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "大分県",
+      "city": "豊後高田市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "大分県",
+      "city": "臼杵市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "鹿児島県",
+      "city": "南さつま市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "島根県",
+      "city": "雲南市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "山口県",
+      "city": "萩市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "富山県",
+      "city": "南砺市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "石川県",
+      "city": "珠洲市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "岐阜県",
+      "city": "郡上市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "山梨県",
+      "city": "北杜市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "和歌山県",
+      "city": "田辺市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "奈良県",
+      "city": "宇陀市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "愛媛県",
+      "city": "今治市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "徳島県",
+      "city": "三好市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "香川県",
+      "city": "小豆島町",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "福岡県",
+      "city": "うきは市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "熊本県",
+      "city": "阿蘇市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "宮崎県",
+      "city": "日南市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "佐賀県",
+      "city": "唐津市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "長崎県",
+      "city": "五島市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "青森県",
+      "city": "弘前市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "岩手県",
+      "city": "遠野市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "山形県",
+      "city": "鶴岡市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "福島県",
+      "city": "会津若松市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "宮城県",
+      "city": "登米市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    },
+    {
+      "prefecture": "静岡県",
+      "city": "下田市",
+      "akiya_bank_url": null,
+      "domain_type": "lg_jp",
+      "source_name": null,
+      "status": "planned",
+      "parser_type": null,
+      "discovered_at": "2026-03-16"
+    }
+  ]
+}
