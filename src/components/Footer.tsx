@@ -6,9 +6,9 @@ export default function Footer() {
       <div className="mx-auto max-w-5xl px-4 py-8">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           <div>
-            <h3 className="font-bold text-green-700">最安田舎暮らし</h3>
+            <h3 className="font-bold text-green-700">掘り出し物件ラボ</h3>
             <p className="mt-2 text-sm text-gray-600">
-              全国の0円〜1000万円の田舎物件を安く買えるポータルサイト
+              格安で土地・物件・賃貸を見つける研究所
             </p>
           </div>
           <div>
@@ -38,7 +38,7 @@ export default function Footer() {
           </div>
         </div>
         <p className="mt-8 text-center text-xs text-gray-400">
-          &copy; 2026 最安田舎暮らし
+          &copy; 2026 掘り出し物件ラボ
         </p>
       </div>
     </footer>

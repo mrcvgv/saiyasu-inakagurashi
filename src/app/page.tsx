@@ -83,11 +83,12 @@ export default function Home() {
     <main>
       {/* ① ヒーロー */}
       <section className="mb-12 rounded-2xl bg-gradient-to-br from-green-700 to-green-900 px-6 py-12 text-center text-white sm:py-16">
-        <h1 className="text-3xl font-bold sm:text-4xl">
-          100万円以下の土地・空き家を探す
+        <p className="text-sm font-medium text-green-200">掘り出し物件ラボ</p>
+        <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
+          格安で土地・物件・賃貸を見つける
         </h1>
         <p className="mt-3 text-lg text-green-100">
-          格安物件専門サイト — 0円物件 / 空き家 / 格安賃貸 / 地方移住
+          0円物件 / 空き家 / 格安賃貸 / 地方移住 — 全国のポータルを横断検索
         </p>
 
         {/* 検索UI */}

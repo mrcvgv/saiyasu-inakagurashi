@@ -5,7 +5,7 @@ export default function Header() {
     <header className="border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
         <Link href="/" className="text-xl font-bold text-green-700">
-          最安田舎暮らし
+          掘り出し物件ラボ
         </Link>
         <nav className="hidden gap-5 text-sm sm:flex">
           <Link href="/cheap-land" className="hover:text-green-700">
