@@ -1,0 +1,45 @@
+{
+  "app": {
+    "name": "Akiya Hunter v1",
+    "timezone": "Asia/Tokyo"
+  },
+  "targets": {
+    "prefectures": [
+      "北海道",
+      "埼玉県",
+      "千葉県",
+      "東京都",
+      "神奈川県",
+      "長野県",
+      "秋田県",
+      "広島県",
+      "高知県",
+      "大分県"
+    ],
+    "max_price_yen": 10000000,
+    "min_land_area_sqm": 90,
+    "exclude_keywords": [
+      "農地",
+      "田畑",
+      "畑",
+      "山林",
+      "原野",
+      "再建築不可"
+    ],
+    "require_akiya": false,
+    "require_building": false
+  },
+  "schedule": {
+    "times": ["08:00", "12:00", "20:00"],
+    "timezone": "Asia/Tokyo"
+  },
+  "discord": {
+    "enabled": true,
+    "webhook_url": "https://discord.com/api/webhooks/1482051804949774440/P2lo-bAZarWknrTxaWft3WfYkZkM-a4tHTqVu3At94q5EIlO3B8K9xeYAG-rMVi8uNlw",
+    "username": "空き家ハンター びむ"
+  },
+  "storage": {
+    "sqlite_path": "./data/akiya_hunter_v1.sqlite",
+    "csv_export_dir": "./data/exports"
+  }
+}

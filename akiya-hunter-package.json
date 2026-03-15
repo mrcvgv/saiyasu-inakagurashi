@@ -1,0 +1,21 @@
+{
+  "name": "akiya-hunter-v1",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Akiya Hunter v1",
+  "type": "commonjs",
+  "scripts": {
+    "collect:listings": "node src/collect_listing_urls.js",
+    "extract:property": "node src/extract_property_details.js",
+    "normalize:filter": "node src/normalize_and_filter.js",
+    "dedupe:history": "node src/dedupe_against_history.js",
+    "notify:discord": "node src/send_discord_notification.js",
+    "run:pipeline": "node src/akiya_hunter_v1.js",
+    "validate:sources": "node scripts/validate-sources.js",
+    "test:parsers": "node scripts/smoke-test-parsers.js",
+    "test": "node scripts/validate-sources.js && node scripts/smoke-test-parsers.js"
+  },
+  "dependencies": {
+    "pdf-parse": "^2.4.5"
+  }
+}

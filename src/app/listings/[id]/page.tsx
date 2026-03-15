@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { listings } from "@/data/listings";
+import { allListings as listings } from "@/data/listings-loader";
 import { formatPrice, formatArea, formatDate } from "@/lib/format";
 import ListingCard from "@/components/ListingCard";
 import SectionTitle from "@/components/SectionTitle";

@@ -1,0 +1,98 @@
+[
+  {
+    "source_name": "ieichiba",
+    "enabled": true,
+    "source_type": "akiya_portal",
+    "base_url": "https://www.ieichiba.com/",
+    "listing_strategy": "ieichiba_home",
+    "detail_strategy": "ieichiba_detail",
+    "prefecture": null,
+    "status": "live",
+    "priority": 1,
+    "notes": "Primary live source — nationwide akiya marketplace portal"
+  },
+  {
+    "source_name": "yamakita_akiya",
+    "enabled": true,
+    "source_type": "municipal_bank",
+    "base_url": "https://www.town.yamakita.kanagawa.jp/category/13-1-2-0-0.html",
+    "listing_strategy": "yamakita_listing",
+    "detail_strategy": "yamakita_detail",
+    "prefecture": "神奈川県",
+    "status": "live",
+    "priority": 2,
+    "notes": "Yamakita town (山北町) municipal akiya bank"
+  },
+  {
+    "source_name": "hanno_akiya",
+    "enabled": true,
+    "source_type": "municipal_bank",
+    "base_url": "https://www.city.hanno.lg.jp/kurashi_seikatsukankyo/akiya_reform/akiyabank/3962.html",
+    "listing_strategy": "hanno_listing",
+    "detail_strategy": "hanno_detail",
+    "prefecture": "埼玉県",
+    "status": "live",
+    "priority": 3,
+    "notes": "Hanno city (飯能市) akiya bank. Live listing page verified with PDF detail links; PDF text extraction validated against real S4-6 and S6-13 property documents."
+  },
+  {
+    "source_name": "saku_akiya",
+    "enabled": true,
+    "source_type": "municipal_bank",
+    "base_url": "https://39ijyu.com/all.php?kubun=IE",
+    "listing_strategy": "saku_listing",
+    "detail_strategy": "saku_detail",
+    "prefecture": "長野県",
+    "status": "live",
+    "priority": 3,
+    "notes": "Saku city (佐久市) akiya via external portal 39ijyu.com. 34 properties. Text-format parser validated; rental listings excluded via linkTextExclude filter."
+  },
+  {
+    "source_name": "kamogawa_akiya",
+    "enabled": true,
+    "source_type": "municipal_bank",
+    "base_url": "https://www.city.kamogawa.lg.jp/site/iju/list34-104.html",
+    "listing_strategy": "kamogawa_listing",
+    "detail_strategy": "kamogawa_detail",
+    "prefecture": "千葉県",
+    "status": "live",
+    "priority": 3,
+    "notes": "Kamogawa city (鴨川市) akiya bank. 43 properties verified 2026-03."
+  },
+  {
+    "source_name": "chichibu_akiya",
+    "enabled": true,
+    "source_type": "municipal_bank",
+    "base_url": "https://www.chichibuakiyabank.com/",
+    "listing_strategy": "chichibu_listing",
+    "detail_strategy": "chichibu_detail",
+    "prefecture": "埼玉県",
+    "status": "live",
+    "priority": 3,
+    "notes": "Chichibu region (秩父地域) akiya bank. 6+ properties verified 2026-03."
+  },
+  {
+    "source_name": "minamiboso_akiya",
+    "enabled": true,
+    "source_type": "municipal_bank",
+    "base_url": "https://www.minamibosocity-iju.jp/guide/house/vacant/",
+    "listing_strategy": "minamiboso_listing",
+    "detail_strategy": "minamiboso_detail",
+    "prefecture": "千葉県",
+    "status": "live",
+    "priority": 3,
+    "notes": "Minamiboso city (南房総市) akiya via external portal. 12+ properties. dl-format (dt/dd) parser validated; live page labels confirmed matching."
+  },
+  {
+    "source_name": "sakuho_akiya",
+    "enabled": false,
+    "source_type": "municipal_bank",
+    "base_url": "https://www.town.sakuho.nagano.jp/iju/live/index.html",
+    "listing_strategy": "sakuho_listing",
+    "detail_strategy": "sakuho_detail",
+    "prefecture": "長野県",
+    "status": "trial",
+    "priority": 3,
+    "notes": "Sakuho town (佐久穂町) akiya bank. 8 house listings verified 2026-03. Text-format parser; linkPattern filters houses only (excludes land plots)."
+  }
+]

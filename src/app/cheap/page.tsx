@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { listings } from "@/data/listings";
+import { allListings as listings } from "@/data/listings-loader";
 import ListingCard from "@/components/ListingCard";
 import SectionTitle from "@/components/SectionTitle";
 

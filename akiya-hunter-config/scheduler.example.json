@@ -1,0 +1,14 @@
+{
+  "timezone": "Asia/Tokyo",
+  "runs": [
+    {
+      "name": "morning-run",
+      "time": "08:00"
+    },
+    {
+      "name": "evening-run",
+      "time": "20:00"
+    }
+  ],
+  "notes": "Use these times when wiring cron or OpenClaw scheduler jobs."
+}

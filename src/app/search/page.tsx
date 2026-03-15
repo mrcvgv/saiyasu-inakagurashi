@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { listings } from "@/data/listings";
+import { allListings as listings } from "@/data/listings-loader";
 import { filterListings } from "@/lib/filters";
 import ListingCard from "@/components/ListingCard";
 import SearchForm from "@/components/SearchForm";
