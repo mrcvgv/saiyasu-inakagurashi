@@ -1,0 +1,23 @@
+export type Listing = {
+  id: string;
+  title: string;
+  price: number;
+  priceLabel: string;
+  prefecture: string;
+  city: string;
+  address?: string;
+  landArea?: number;
+  buildingArea?: number;
+  builtYear?: number;
+  description?: string;
+  imageUrl?: string;
+  sourceName: string;
+  sourceUrl: string;
+  tags: string[];
+  isCheap: boolean;
+  isFree: boolean;
+  isOldHouse: boolean;
+  isDIYFriendly: boolean;
+  createdAt: string;
+  updatedAt: string;
+};

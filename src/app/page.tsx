@@ -1,65 +1,131 @@
-import Image from "next/image";
+import Link from "next/link";
+import { listings } from "@/data/listings";
+import ListingCard from "@/components/ListingCard";
+import SectionTitle from "@/components/SectionTitle";
+
+const CATEGORIES = [
+  {
+    title: "物件検索",
+    description: "条件を指定して物件を探す",
+    href: "/search",
+    color: "bg-green-50 border-green-200",
+  },
+  {
+    title: "激安物件",
+    description: "0円〜100万円の超低価格物件",
+    href: "/cheap",
+    color: "bg-orange-50 border-orange-200",
+  },
+  {
+    title: "移住補助金",
+    description: "自治体の移住支援制度を探す",
+    href: "/subsidy",
+    color: "bg-blue-50 border-blue-200",
+  },
+];
+
+const PRICE_LINKS = [
+  { label: "0円物件", href: "/search?minPrice=0&maxPrice=0" },
+  { label: "〜50万円", href: "/search?maxPrice=500000" },
+  { label: "50万〜100万円", href: "/search?minPrice=500000&maxPrice=1000000" },
+];
+
+const REGION_LINKS = [
+  { label: "北海道", href: "/search?prefecture=北海道" },
+  { label: "千葉県", href: "/search?prefecture=千葉県" },
+  { label: "長野県", href: "/search?prefecture=長野県" },
+  { label: "高知県", href: "/search?prefecture=高知県" },
+  { label: "大分県", href: "/search?prefecture=大分県" },
+];
 
 export default function Home() {
+  const newListings = [...listings]
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+    .slice(0, 4);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main>
+      {/* ヒーローセクション */}
+      <section className="mb-12 text-center">
+        <h1 className="text-3xl font-bold text-green-800 sm:text-4xl">
+          最安田舎暮らし
+        </h1>
+        <p className="mt-3 text-lg text-gray-600">
+          全国の0円〜格安物件を探せるポータルサイト
+        </p>
+        <Link
+          href="/search"
+          className="mt-6 inline-block rounded-lg bg-green-700 px-8 py-3 text-sm font-semibold text-white hover:bg-green-800 transition"
+        >
+          物件を検索する
+        </Link>
+      </section>
+
+      {/* カテゴリカード */}
+      <section className="mb-12">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {CATEGORIES.map((cat) => (
+            <Link
+              key={cat.href}
+              href={cat.href}
+              className={`rounded-lg border p-6 transition hover:shadow-md ${cat.color}`}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <h2 className="text-lg font-bold text-gray-900">{cat.title}</h2>
+              <p className="mt-1 text-sm text-gray-600">{cat.description}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 新着物件 */}
+      <section className="mb-12">
+        <SectionTitle>新着物件</SectionTitle>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {newListings.map((listing) => (
+            <ListingCard key={listing.id} listing={listing} />
+          ))}
+        </div>
+        <div className="mt-6 text-center">
+          <Link
+            href="/listings"
+            className="text-sm text-green-700 hover:underline"
+          >
+            すべての物件を見る →
+          </Link>
+        </div>
+      </section>
+
+      {/* 価格帯別 */}
+      <section className="mb-12">
+        <SectionTitle>価格帯から探す</SectionTitle>
+        <div className="flex flex-wrap gap-3">
+          {PRICE_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-full border border-green-300 bg-green-50 px-4 py-2 text-sm text-green-800 hover:bg-green-100 transition"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              {link.label}
+            </Link>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* 地域別 */}
+      <section className="mb-12">
+        <SectionTitle>地域から探す</SectionTitle>
+        <div className="flex flex-wrap gap-3">
+          {REGION_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-full border border-gray-300 bg-gray-50 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
