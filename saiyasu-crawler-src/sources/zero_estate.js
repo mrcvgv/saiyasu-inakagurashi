@@ -125,9 +125,14 @@ function extractZeroEstateProperty(html, url) {
   // Extract inquiry code from URL: /zero/kanto/3131_sosa/ → 3131
   const inquiryCode = matchOne(url, /\/zero\/[^/]+\/(\d+)[_/]/);
 
-  // Detect sold/closed status from page badges
-  const isSold = /成約済/.test(html);
-  const isClosed = /受付停止/.test(html);
+  // Detect sold/closed status — only check within the property badge/title area,
+  // not the entire page (sidebar/footer may contain "成約済" for other listings)
+  const titleArea = html.match(/<article[\s\S]*?<\/article>/i)?.[0]
+    || html.match(/<div[^>]*class="[^"]*entry[^"]*"[\s\S]*?<\/div>/i)?.[0]
+    || '';
+  const badgeArea = html.match(/<span[^>]*class="[^"]*sold[^"]*"[^>]*>[\s\S]*?<\/span>/i)?.[0] || '';
+  const isSold = /成約済/.test(badgeArea) || /class="[^"]*sold[^"]*"/.test(titleArea);
+  const isClosed = /受付停止/.test(badgeArea);
   const statusText = isSold ? '成約済' : isClosed ? '受付停止' : statusRaw || '募集中';
 
   return {

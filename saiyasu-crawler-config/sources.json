@@ -709,15 +709,15 @@
   },
   {
     "source_name": "jmty_estate",
-    "enabled": false,
+    "enabled": true,
     "source_type": "rent_portal",
     "base_url": "https://jmty.jp/all/est",
-    "listing_strategy": null,
-    "detail_strategy": null,
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
     "prefecture": null,
-    "status": "planned",
+    "status": "live",
     "priority": 6,
-    "notes": "PLANNED: Phase 2 — ジモティー不動産。月額5万円以下フィルタ。web_fetch feasibility未検証。"
+    "notes": "ジモティー不動産。generic parser で取得。"
   },
   {
     "source_name": "suumo_rent",

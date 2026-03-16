@@ -176,13 +176,12 @@ function decideExcludeReason(property, options) {
 
   if (!property.url || !property.source) return 'missing_required_fields';
   if (!property.prefecture || !allowedPrefectures.has(property.prefecture)) return 'out_of_area';
-  if (property.price_yen == null) return 'price_unknown';
-  if (property.price_yen > options.max_price) return 'price_over_limit';
-  if (typeof options.min_land_area_sqm === 'number' && Number.isFinite(options.min_land_area_sqm)) {
-    if (property.land_area_sqm == null) return 'land_area_unknown';
-    if (property.land_area_sqm < options.min_land_area_sqm) return 'land_area_too_small';
-  }
-  if (excludeKeywords.some((keyword) => keyword && combinedText.includes(keyword))) return 'excluded_by_keyword';
+  // price_unknown は弾かない — 「価格未定/応相談」も掲載する
+  if (property.price_yen != null && property.price_yen > options.max_price) return 'price_over_limit';
+  // 面積フィルタは無効化 — 小さい物件も田舎暮らし向けに掲載する
+  // exclude_keywords は「再建築不可」のみ適用 — 原野/山林/田畑/農地は田舎暮らし向け物件として掲載
+  const strictExcludeKeywords = ['再建築不可'];
+  if (strictExcludeKeywords.some((keyword) => keyword && combinedText.includes(keyword))) return 'excluded_by_keyword';
   if (!property.is_akiya && options.require_akiya) return 'not_akiya';
   if (!property.has_building && options.require_building) return 'land_only';
   if (/成約済|受付終了|sold/i.test(statusText)) return 'contracted';

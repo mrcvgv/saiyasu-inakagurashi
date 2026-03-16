@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# crawler data (auto-generated, large)
+/data/
+*.sqlite
+
+# supabase temp
+supabase/.temp/
+
+# scrape reports
+src/data/scrape-report-today.json

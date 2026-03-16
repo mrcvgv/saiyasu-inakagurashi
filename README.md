@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 掘り出し物件ラボ
 
-## Getting Started
+日本全国の **格安物件・空き家・競売物件** を横断検索できるWebサイトです。
 
-First, run the development server:
+0円物件から格安賃貸まで、田舎暮らし・地方移住に使える物件情報をまとめて掲載しています。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## できること
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 全国の格安物件を一括検索
+- 都道府県・価格帯で絞り込み
+- 空き家・古民家・格安賃貸・競売物件をカテゴリ別に閲覧
+- 移住補助金情報の確認
+- 無料相談
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## サイト構成
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| ページ | 内容 |
+|---|---|
+| トップ | カテゴリ・価格帯・エリアから物件を探す |
+| 検索 | キーワード・都道府県・価格帯で絞り込み |
+| 物件一覧 / 詳細 | 全物件の閲覧・個別物件の詳細情報 |
+| 格安土地 | 0円〜1000万円の土地・物件 |
+| 空き家 | 古民家・セルフリノベ向け物件 |
+| 格安賃貸 | 月額の安い賃貸物件 |
+| 競売・公売 | 裁判所競売・官公庁オークション |
+| 補助金 | 都道府県別の移住補助金情報 |
+| 移住ガイド | 田舎暮らしの始め方 |
 
-## Learn More
+## データについて
 
-To learn more about Next.js, take a look at the following resources:
+掲載情報は各ポータルサイト・自治体の公開情報に基づいています。
+最新情報は必ず元サイトでご確認ください。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 開発に参加する
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+開発者の方は [README_FOR_FULLER.md](README_FOR_FULLER.md) を参照してください。
 
-## Deploy on Vercel
+## 関連リンク
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 物件データ収集: akiya-hunter (別リポジトリ)

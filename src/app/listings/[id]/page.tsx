@@ -54,8 +54,16 @@ export default async function ListingDetailPage({ params }: Props) {
       <article>
         {/* メイン情報 */}
         <div className="mb-6 rounded-lg border border-gray-200 overflow-hidden">
-          <div className="aspect-video bg-gray-100 flex items-center justify-center text-gray-400">
-            画像プレースホルダー
+          <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden">
+            {listing.imageUrl && listing.imageUrl !== "/images/placeholder.jpg" && !listing.imageUrl.includes("print.gif") ? (
+              <img
+                src={listing.imageUrl}
+                alt={listing.title}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <span className="text-gray-400">No Image</span>
+            )}
           </div>
         </div>
 

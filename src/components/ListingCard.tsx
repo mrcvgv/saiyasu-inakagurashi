@@ -12,8 +12,17 @@ export default function ListingCard({ listing }: Props) {
       href={`/listings/${listing.id}`}
       className="block overflow-hidden rounded-lg border border-gray-200 bg-white transition hover:shadow-md"
     >
-      <div className="aspect-video bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
-        {listing.imageUrl ? "画像" : "No Image"}
+      <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden">
+        {listing.imageUrl && listing.imageUrl !== "/images/placeholder.jpg" && !listing.imageUrl.includes("print.gif") && !listing.imageUrl.includes("/icon") ? (
+          <img
+            src={listing.imageUrl}
+            alt={listing.title}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <span className="text-sm text-gray-400">No Image</span>
+        )}
       </div>
       <div className="p-4">
         <div className="flex items-start justify-between gap-2">
