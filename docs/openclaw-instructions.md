@@ -70,10 +70,12 @@
 
 ### subsidies-registry.json
 全国移住補助金レジストリ。
-- 6件のシード補助金データ（src/data/subsidies.ts と対応）
+- 6件のシード補助金データ（src/data/subsidies.ts と同期）
 - 2件の国の制度（移住支援事業、起業支援事業）
 - 8カテゴリ分類（migration_support, housing_acquisition, akiya_renovation, etc.）
 - 8波に分けた段階的収集計画
+- 現時点の安全な定期更新は seed sync と公式ドメインURL整備まで。自治体別の本格収集は search/fetch 前提で未自動化
+- fiscal-year の daily subsidy check は、まず公式URL到達確認と seed の鮮度確認を行い、制度詳細URLが安全に特定できる場合のみ更新する（推測更新しない）
 
 ---
 

@@ -4,7 +4,13 @@
     "updated_at": "2026-03-16",
     "total_entries": 6,
     "total_planned_prefectures": 47,
-    "coverage_notes": "Phase 3 scaffold. Seed data from src/data/subsidies.ts. Nationwide collection pending — requires web_search per prefecture per municipality. Target: ~1,740 municipalities.",
+    "coverage_notes": "Phase 3 scaffold. Seed data synced with src/data/subsidies.ts. Official per-municipality subsidy discovery is not yet automated in-repo; nationwide collection remains pending and will require search/fetch support per prefecture per municipality. Target: ~1,740 municipalities.",
+    "last_fiscal_year_check": {
+      "checked_at": "2026-03-16",
+      "window": "2026-03-01 to 2026-04-30",
+      "method": "Official URL reachability check via web_fetch; no municipality-level expansion without reliable official program-detail URLs.",
+      "result": "National program page reachable. Seed municipality entries left unchanged conservatively."
+    },
     "categories": [
       "migration_support",
       "housing_acquisition",
