@@ -64,6 +64,20 @@ def infer_tags(row):
         tags.append('賃貸')
     return list(set(tags))
 
+def infer_status(row):
+    status = row['status_text'] or ''
+    if '成約' in status or '受付終了' in status or 'sold' in status.lower():
+        return 'contracted'
+    return 'active'
+
+def infer_listing_type(row, tags):
+    if '賃貸' in tags:
+        return 'rent'
+    price = row['price_yen']
+    if price is not None and price == 0:
+        return 'free'
+    return 'sale'
+
 def main():
     if not os.path.exists(DB_PATH):
         print(f'DB not found: {DB_PATH}')
@@ -72,7 +86,7 @@ def main():
     db = sqlite3.connect(DB_PATH)
     db.row_factory = sqlite3.Row
     rows = db.execute(
-        'SELECT * FROM properties WHERE price_yen <= 10000000 OR price_yen IS NULL ORDER BY last_seen_at DESC'
+        'SELECT * FROM properties ORDER BY last_seen_at DESC'
     ).fetchall()
     db.close()
 
@@ -105,6 +119,8 @@ def main():
             'isFree': price == 0,
             'isOldHouse': (row['building_age'] or 0) >= 40,
             'isDIYFriendly': 'DIY可' in tags,
+            'status': infer_status(row),
+            'listingType': infer_listing_type(row, tags),
             'createdAt': row['first_seen_at'] or row['created_at'],
             'updatedAt': row['last_seen_at'] or row['updated_at'],
         })

@@ -52,24 +52,36 @@ export default async function ListingDetailPage({ params }: Props) {
       </nav>
 
       <article>
+        {/* 成約済みバナー */}
+        {listing.status === "contracted" && (
+          <div className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-center">
+            <span className="font-bold text-red-700">この物件は成約済みです</span>
+          </div>
+        )}
+
         {/* メイン情報 */}
-        <div className="mb-6 rounded-lg border border-gray-200 overflow-hidden">
+        <div className="mb-6 rounded-lg border border-gray-200 overflow-hidden relative">
           <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden">
             {listing.imageUrl && listing.imageUrl !== "/images/placeholder.jpg" && !listing.imageUrl.includes("print.gif") ? (
               <img
                 src={listing.imageUrl}
                 alt={listing.title}
-                className="h-full w-full object-cover"
+                className={`h-full w-full object-cover ${listing.status === "contracted" ? "grayscale" : ""}`}
               />
             ) : (
               <span className="text-gray-400">No Image</span>
             )}
           </div>
+          {listing.status === "contracted" && (
+            <span className="absolute top-3 left-3 rounded bg-red-600 px-3 py-1 text-sm font-bold text-white">
+              成約済
+            </span>
+          )}
         </div>
 
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">{listing.title}</h1>
-          <p className="mt-2 text-3xl font-bold text-green-700">
+          <p className={`mt-2 text-3xl font-bold ${listing.status === "contracted" ? "text-gray-400 line-through" : "text-green-700"}`}>
             {formatPrice(listing.price)}
           </p>
           <p className="mt-1 text-gray-600">
@@ -162,7 +174,7 @@ export default async function ListingDetailPage({ params }: Props) {
         {listing.description && (
           <section className="mb-8">
             <SectionTitle>物件説明</SectionTitle>
-            <p className="leading-relaxed text-gray-700">
+            <p className="whitespace-pre-wrap leading-relaxed text-gray-700">
               {listing.description}
             </p>
           </section>

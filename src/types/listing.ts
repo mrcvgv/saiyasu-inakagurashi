@@ -18,6 +18,8 @@ export type Listing = {
   isFree: boolean;
   isOldHouse: boolean;
   isDIYFriendly: boolean;
+  status?: "active" | "contracted" | "unknown";
+  listingType?: "sale" | "rent" | "auction" | "free";
   createdAt: string;
   updatedAt: string;
 };

@@ -184,7 +184,7 @@ function decideExcludeReason(property, options) {
   if (strictExcludeKeywords.some((keyword) => keyword && combinedText.includes(keyword))) return 'excluded_by_keyword';
   if (!property.is_akiya && options.require_akiya) return 'not_akiya';
   if (!property.has_building && options.require_building) return 'land_only';
-  if (/成約済|受付終了|sold/i.test(statusText)) return 'contracted';
+  // 成約済みも含める — UI側でフィルタ/バッジ表示する
   return null;
 }
 
