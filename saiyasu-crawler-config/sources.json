@@ -922,5 +922,41 @@
     "status": "browser_only",
     "priority": 1,
     "notes": "athome賃貸6万以下。JS必須→OpenClaw Browser toolで取得"
+  },
+  {
+    "source_name": "hatomark",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://www.hatomarksite.com/",
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
+    "prefecture": null,
+    "status": "testing",
+    "priority": 2,
+    "notes": "ハトマークサイト（全宅連）。宅建協会公式の不動産検索サイト"
+  },
+  {
+    "source_name": "hatomark_zentaku",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://www.hatomarksite-zentaku.com/",
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
+    "prefecture": null,
+    "status": "testing",
+    "priority": 2,
+    "notes": "ハトマークサイト全宅連版。全国の賃貸・売買"
+  },
+  {
+    "source_name": "rabbynet",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://rabbynet.zennichi.or.jp/",
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
+    "prefecture": null,
+    "status": "testing",
+    "priority": 2,
+    "notes": "ラビーネット不動産（ウサギマーク）。全日本不動産協会公式"
   }
 ]
