@@ -96,8 +96,9 @@ web_search「{都道府県名} 移住支援 空き家」
 | ビレッジハウス | https://www.villagehouse.jp/ | web_fetch |
 | UR賃貸住宅 | https://www.ur-net.go.jp/ | web_fetch |
 | 公営住宅（各自治体） | 各自治体サイト | web_fetch |
-| SUUMO賃貸（3万以下） | https://suumo.jp/chintai/ | browser |
-| HOME'S賃貸（3万以下） | https://www.homes.co.jp/chintai/ | browser |
+| SUUMO賃貸（6万以下） | https://suumo.jp/chintai/ | browser |
+| HOME'S賃貸（6万以下） | https://www.homes.co.jp/chintai/ | browser |
+| athome賃貸（6万以下） | https://www.athome.co.jp/chintai/ | browser |
 
 ### 競売・公売系
 

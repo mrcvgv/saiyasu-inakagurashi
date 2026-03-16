@@ -4,9 +4,9 @@ import { allListings as listings } from "@/data/listings-loader";
 import ListingCard from "@/components/ListingCard";
 
 export const metadata: Metadata = {
-  title: "格安賃貸 — 月1万〜5万円の賃貸物件",
+  title: "格安賃貸 — 月6万円以下の賃貸物件",
   description:
-    "月額1万〜5万円の格安賃貸物件を全国から検索。田舎暮らし・地方移住に最適な安い賃貸。",
+    "月額6万円以下の格安賃貸物件を全国から検索。田舎暮らし・地方移住に最適な安い賃貸。",
 };
 
 export default function CheapRentPage() {
@@ -18,7 +18,7 @@ export default function CheapRentPage() {
     <main>
       <h1 className="mb-2 text-2xl font-bold">格安賃貸</h1>
       <p className="mb-8 text-sm text-gray-500">
-        月1万〜5万円の格安賃貸物件（{rentListings.length}件）
+        月6万円以下の格安賃貸物件（{rentListings.length}件）
       </p>
 
       {rentListings.length > 0 ? (

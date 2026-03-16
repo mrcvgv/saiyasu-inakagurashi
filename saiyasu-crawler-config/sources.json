@@ -721,15 +721,15 @@
   },
   {
     "source_name": "suumo_rent",
-    "enabled": false,
+    "enabled": true,
     "source_type": "rent_portal",
     "base_url": "https://suumo.jp/chintai/",
     "listing_strategy": null,
     "detail_strategy": null,
     "prefecture": null,
-    "status": "planned",
-    "priority": 7,
-    "notes": "PLANNED: Phase 2 — SUUMO賃貸（低価格帯）。Browser-heavy、JS必須。robots.txt確認とレート制御が必須。無理にブラウザ偽装しない。"
+    "status": "browser_only",
+    "priority": 1,
+    "notes": "SUUMO賃貸6万以下。JS必須→OpenClaw Browser toolで取得"
   },
   {
     "source_name": "fudousan_japan",
@@ -826,5 +826,101 @@
     "status": "testing",
     "priority": 2,
     "notes": "田舎ねっと"
+  },
+  {
+    "source_name": "villagehouse",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://www.villagehouse.jp/",
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
+    "prefecture": null,
+    "status": "testing",
+    "priority": 2,
+    "notes": "ビレッジハウス。敷金0/仲介料0の格安賃貸"
+  },
+  {
+    "source_name": "ur_chintai",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://www.ur-net.go.jp/chintai/list/",
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
+    "prefecture": null,
+    "status": "testing",
+    "priority": 2,
+    "notes": "UR賃貸住宅。礼金0/更新料0/保証人不要"
+  },
+  {
+    "source_name": "inaka_chintai",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://www.inaka-chintai.com/",
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
+    "prefecture": null,
+    "status": "testing",
+    "priority": 2,
+    "notes": "ビギンズ。田舎暮らし賃貸専門"
+  },
+  {
+    "source_name": "heyamaru",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://www.jonan73.jp/",
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
+    "prefecture": null,
+    "status": "testing",
+    "priority": 3,
+    "notes": "部屋まる。6万以下専門"
+  },
+  {
+    "source_name": "goo_rent",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://house.goo.ne.jp/rent/",
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
+    "prefecture": null,
+    "status": "testing",
+    "priority": 3,
+    "notes": "goo住宅・不動産 賃貸"
+  },
+  {
+    "source_name": "homemate",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://www.homemate.co.jp/soba/",
+    "listing_strategy": "generic_anchor",
+    "detail_strategy": "generic_detail",
+    "prefecture": null,
+    "status": "testing",
+    "priority": 3,
+    "notes": "ホームメイト。家賃相場+物件検索"
+  },
+  {
+    "source_name": "homes_rent",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://www.homes.co.jp/chintai/",
+    "listing_strategy": null,
+    "detail_strategy": null,
+    "prefecture": null,
+    "status": "browser_only",
+    "priority": 1,
+    "notes": "HOMES賃貸6万以下。JS必須→OpenClaw Browser toolで取得"
+  },
+  {
+    "source_name": "athome_rent",
+    "enabled": true,
+    "source_type": "rent_portal",
+    "base_url": "https://www.athome.co.jp/chintai/",
+    "listing_strategy": null,
+    "detail_strategy": null,
+    "prefecture": null,
+    "status": "browser_only",
+    "priority": 1,
+    "notes": "athome賃貸6万以下。JS必須→OpenClaw Browser toolで取得"
   }
 ]
