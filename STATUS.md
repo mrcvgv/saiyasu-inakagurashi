@@ -1,6 +1,6 @@
 # STATUS.md — プロジェクト現状レポート
 
-最終更新: 2026-03-16
+最終更新: 2026-03-16 19:00 JST
 
 ---
 
@@ -43,7 +43,7 @@
 
 ## サイト機能
 
-### 実装済みページ (13ページ)
+### 実装済みページ (13ページ / 550静的ルート)
 
 | ページ | パス | 状態 |
 |---|---|---|
@@ -73,21 +73,39 @@
 
 ---
 
-## クローラー (OpenClaw / akiya_hunter_v1)
+## クローラー / スクレイピング
 
-### アーキテクチャ
+### 2系統のパイプライン
+
+#### 1. akiya_hunter_v1.js (メイン)
 
 ```
 sources.json (80ソース定義)
   ↓
-akiya_hunter_v1.js (Node.js パイプライン)
+akiya_hunter_v1.js (Node.js)
   ↓ collect → extract → normalize → dedupe → notify → save
-data/akiya_hunter_v1.sqlite (SQLite DB)
+data/akiya_hunter_v1.sqlite (SQLite DB, 535件)
   ↓
-export-from-db.py (Python エクスポート)
+export-from-db.py (Python)
   ↓
-src/data/listings-live.json (Next.js が読むデータ)
+src/data/listings-live.json (535件)
 ```
+
+- 実行: `node saiyasu-crawler-src/akiya_hunter_v1.js`
+- エクスポート: `python3 scripts/export-from-db.py`
+
+#### 2. scrape-pipeline.js (OpenClaw 追加)
+
+```
+scripts/scrape-pipeline.js
+  ↓ best-effort scraping (fetch + Playwright browser)
+  ↓ semantic extraction
+data/akiya_hunter_v1.sqlite に投入
+```
+
+- 実行: `npm run scrape:pipeline`
+- Playwright 経由で Browser scraping 対応
+- **ただし現環境では Playwright の共有ライブラリ不足 (libnspr4.so) で Browser 起動が失敗**
 
 ### ソース設定 (80ソース)
 
@@ -97,31 +115,67 @@ src/data/listings-live.json (Next.js が読むデータ)
 | **自治体空き家バンク** | 10 | web_fetch 稼働中 |
 | **全国ポータル** | 7 | 一部稼働 (ieichiba, inakanet, jmty) |
 | **賃貸サイト** | 12 | web_fetch 一部稼働 / Browser待ち |
-| **協会系** | 3 | Browser待ち |
-| **その他 (disabled)** | 1 | DNS解決不可 |
+| **協会系 (ハトマーク/ラビーネット)** | 3 | Browser待ち |
+| **その他 (disabled)** | 1 | DNS解決不可 (akiya_gateway) |
 
-### Browser tool 必須 (OpenClaw 待ち)
+---
 
-以下はJS レンダリング必須で、OpenClaw の Browser tool でのみ取得可能:
+## OpenClaw 最新活動 (2026-03-16 時点)
 
-| サイト | URL | フィルタ |
+### 今回 OpenClaw がやったこと
+
+- `scripts/scrape-pipeline.js` — best-effort scraping pipeline を作成
+- `scripts/run-semantic-scrape-today.js` — 意味抽出スクレイプ実験スクリプト
+- Playwright 導入 (Chromium browser binary)
+- `npm run scrape:pipeline` / `npm run export:listings` コマンド追加
+- GitHub に push 済み (`c3f765d`, `21dd3ef`)
+
+### OpenClaw 側の直近スクレイプ結果
+
+| ソース | 件数 | 状態 |
 |---|---|---|
-| SUUMO 賃貸 | suumo.jp/chintai/ | 月6万以下 |
-| LIFULL HOME'S 賃貸 | homes.co.jp/chintai/ | 月6万以下 |
-| athome 賃貸 | athome.co.jp/chintai/ | 月6万以下 |
-| ハトマークサイト | hatomarksite.com | 賃貸6万以下 |
-| ラビーネット (ウサギマーク) | rabbynet.zennichi.or.jp | 賃貸6万以下 |
+| jmty_realestate | 30 | 取得成功 |
+| inakanet | 25 | 取得成功 |
+| suumo_rent | 0 | **Browser 起動失敗** (libnspr4.so 不足) |
+| homes_rent | 0 | **Browser 起動失敗** |
+| athome_rent | 0 | **Browser 起動失敗** |
+| inakagurashi | 0 | **DNS解決失敗** |
 
-### cron スケジュール (設定済み・要有効化)
+### OpenClaw cron ジョブ (全9ジョブ, 全有効)
 
-| ジョブ | 時刻 | 頻度 |
+| ジョブ | スケジュール | 最終実行 | 状態 |
+|---|---|---|---|
+| 賃貸ポータル巡回 | 毎日 06:00 JST | 2026-03-16 | OK |
+| 空き家バンク+全国ポータル | 毎日 08:00 JST | 2026-03-16 | OK (415秒) |
+| 全国ポータル2巡目 | 毎日 20:00 JST | 待機中 | — |
+| エクスポート+git push | 毎日 21:00 JST | 待機中 | — |
+| 補助金チェック (週次) | 月曜 09:00 JST | 2026-03-16 | OK |
+| 新ソース発見 (週次) | 日曜 03:00 JST | 待機中 | — |
+| 年度補助金チェック (3-4月) | 毎日 09:30 JST | 2026-03-16 | OK |
+| Akiya Hunter v1 (workspace版) | 毎日 08:00/20:00 JST | 2026-03-16 | OK |
+| Discord 通知 | 毎日 08:00/20:00 JST | 2026-03-16 | **エラー** (連続5回) |
+
+### OpenClaw のブロッカー
+
+| 問題 | 影響 | 対策 |
 |---|---|---|
-| 賃貸ポータル巡回 | 06:00 | 毎日 |
-| 空き家バンク+全国ポータル | 08:00 | 毎日 |
-| 全国ポータル2巡目 | 20:00 | 毎日 |
-| エクスポート+git push | 21:00 | 毎日 |
-| 補助金チェック | 09:00 月曜 | 週1 |
-| 新ソース発見 | 03:00 日曜 | 週1 |
+| **Playwright 共有ライブラリ不足** | SUUMO/HOMES/athome が取得できない | `sudo apt install libnspr4 libnss3 libatk1.0-0` 等を実行 |
+| **Discord 通知エラー** | 新着物件の通知が飛ばない | delivery 設定を `discord` → 正しいチャンネル形式に修正 |
+| **inakagurashi DNS 失敗** | 田舎暮らし情報館が取得できない | URLを `https://www.inakagurashi.jp/` で再確認 |
+| **workspace側が旧設定 (11ソース)** | 80ソース設定と未同期 | saiyasu 側のクローラーを正とし、workspace 側は補助のみ |
+
+---
+
+## Claude Code 側の直近実行結果
+
+| 実行 | ソース数 | 候補URL | 抽出 | accepted | DB件数 |
+|---|---|---|---|---|---|
+| 2026-03-16 08:38 UTC | 59 | 785 | 702 | 688 | 535 |
+| 2026-03-16 07:51 UTC | 56 | 739 | 703 | 687 | 460 |
+| 2026-03-16 07:26 UTC | 55 | 709 | 703 | 79 | — |
+| 2026-03-16 06:55 UTC (初回) | 55 | 709 | 701 | 30 | — |
+
+フィルタ緩和により 30 → 688 まで改善した。
 
 ---
 
@@ -134,6 +188,7 @@ src/data/listings-live.json (Next.js が読むデータ)
 | Tailwind CSS | v4 | スタイリング |
 | React | 19 | UI |
 | SQLite | — | クローラーDB |
+| Playwright | — | Browser scraping (OpenClaw 追加) |
 | Supabase | — | 将来のDB接続 |
 | OpenClaw | gpt-5.4 | スクレイピング自動化 |
 | Vercel | — | ホスティング (予定) |
@@ -144,49 +199,80 @@ src/data/listings-live.json (Next.js が読むデータ)
 
 ```
 saiyasu-inakagurashi/
-├── src/app/          13ページ (Next.js App Router)
-├── src/components/   6コンポーネント (Header, Footer, ListingCard, SearchForm, SectionTitle, ListingControls)
-├── src/data/         データ層 (listings-live.json 535件, dummy, prefectures, regions, subsidies)
-├── src/lib/          ユーティリティ (filters, sort, format, supabase, queries)
-├── src/types/        型定義 (Listing, Subsidy)
-├── saiyasu-crawler-src/    クローラーパイプライン (Node.js)
-├── saiyasu-crawler-config/ ソース定義 (80ソース)
-├── scripts/          export-from-db.py, crawl-and-deploy.sh 等
-├── specs/            AI間仕様書 (SAIYASU_SPEC, PAGE_MAP, UI_REQUIREMENTS 等)
-├── data/             SQLite DB, 実行ログ (gitignore)
-├── CLAUDE.md         Builder AI 指示書
-├── CONTRIBUTING.md   開発者向けガイド
-├── README.md         ユーザー向け説明
-└── README_FOR_FULLER.md  フロントマン向け詳細ガイド
+├── src/app/               13ページ (Next.js App Router)
+├── src/components/        6コンポーネント
+├── src/data/              listings-live.json (535件) + dummy + masters
+├── src/lib/               filters, sort, format, supabase, queries
+├── src/types/             Listing, Subsidy
+├── saiyasu-crawler-src/   クローラーパイプライン (akiya_hunter_v1.js)
+├── saiyasu-crawler-config/ sources.json (80ソース)
+├── scripts/
+│   ├── export-from-db.py         DB → JSON エクスポート
+│   ├── crawl-and-deploy.sh       クロール+エクスポート+git push 自動化
+│   ├── scrape-pipeline.js        best-effort scraping (OpenClaw作成)
+│   ├── run-semantic-scrape-today.js  意味抽出実験 (OpenClaw作成)
+│   ├── export-listings.js        Node.js版エクスポート
+│   └── import-to-supabase.js     Supabase投入
+├── specs/                 AI間仕様書
+├── docs/
+│   ├── openclaw-scraping-orders.md   OpenClaw への全ソース指示書
+│   └── openclaw-current-report.md    OpenClaw 最新活動レポート
+├── data/                  SQLite DB, 実行ログ (gitignore)
+├── CLAUDE.md              Builder AI 指示書
+├── CONTRIBUTING.md        開発者向けガイド
+├── README.md              ユーザー向け説明
+├── README_FOR_FULLER.md   フロントマン向け詳細ガイド
+└── STATUS.md              このファイル
 ```
 
 ---
 
-## 関連プロジェクト
+## 主要コマンド
 
-| プロジェクト | パス | 役割 |
-|---|---|---|
-| saiyasu-inakagurashi | /home/koheisato/saiyasu-inakagurashi/ | 公開Webサイト (このリポジトリ) |
-| akiya-hunter | /home/koheisato/akiya-hunter/ | 物件収集の分離先 (予定) |
-| shared-ai | /home/koheisato/shared-ai/ | プロジェクト間仕様共有 |
-| peakful | /home/koheisato/peakful/ | 100サービス量産基盤 |
-| OpenClaw workspace | ~/.openclaw/workspace/ | スクレイピング自動化エージェント |
+```bash
+# 開発サーバー
+npm run dev
+
+# ビルド
+npm run build
+
+# クローラー実行 (akiya_hunter_v1)
+node saiyasu-crawler-src/akiya_hunter_v1.js
+
+# best-effort scraping (OpenClaw版)
+npm run scrape:pipeline
+
+# DB → listings-live.json エクスポート
+python3 scripts/export-from-db.py
+
+# DB件数確認
+python3 -c "import sqlite3; db=sqlite3.connect('data/akiya_hunter_v1.sqlite'); print(db.execute('SELECT COUNT(*) FROM properties').fetchone()[0])"
+
+# クロール+エクスポート+git push 一括
+./scripts/crawl-and-deploy.sh
+```
 
 ---
 
 ## 次にやること
 
+### 優先度: 最高
+1. **Playwright 環境を修復** — `libnspr4.so` 等の不足ライブラリをインストールし、SUUMO/HOMES/athome を取得可能にする
+2. **Browser必須サイト5つの取得** — SUUMO賃貸, HOMES賃貸, athome賃貸, ハトマーク, ラビーネット (月6万以下)
+3. **Discord 通知の修復** — delivery channel 設定の修正
+
 ### 優先度: 高
-1. **OpenClaw で Browser tool ソースを取得** — SUUMO/HOMES/athome/ハトマーク/ラビーネット
-2. **Vercel デプロイ** — 公開URL取得
-3. **cron 有効化** — 毎日自動クロール+エクスポート+push
+4. **Vercel デプロイ** — 公開URL取得
+5. **cron の安定稼働確認** — 21:00 の自動 export+push が正しく動くか検証
+6. **fetch系ソースの精度向上** — jmty/inakanet の抽出精度改善
 
 ### 優先度: 中
-4. **都道府県別ページ** — /prefecture/[slug] (SEOランディング47ページ)
-5. **SEO基盤** — metadata, sitemap.xml, 構造化データ
-6. **Supabase 接続** — 静的JSONからDB読み込みに切り替え
+7. **都道府県別ページ** — /prefecture/[slug] (SEOランディング47ページ)
+8. **SEO基盤** — metadata, sitemap.xml, 構造化データ
+9. **Supabase 接続** — 静的JSONからDB読み込みに切り替え
+10. **DB品質改善** — 住所誤抽出, 価格誤判定, 0円判定の誤爆を修正
 
 ### 優先度: 低
-7. **補助金データ拡充** — 現在6件 → 500件目標
-8. **ガイド記事コンテンツ** — /guide 以下
-9. **相談フォームのバックエンド** — 送信機能実装
+11. **補助金データ拡充** — 現在6件 → 500件目標
+12. **ガイド記事コンテンツ** — /guide 以下
+13. **相談フォームのバックエンド** — 送信機能実装
