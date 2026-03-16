@@ -29,6 +29,13 @@ const CATEGORIES = [
     color: "bg-blue-50 border-blue-200 hover:bg-blue-100",
   },
   {
+    title: "競売・差押物件",
+    description: "裁判所競売・公売・差押え物件",
+    href: "/auction",
+    icon: "⚖️",
+    color: "bg-red-50 border-red-200 hover:bg-red-100",
+  },
+  {
     title: "事業用物件",
     description: "倉庫付き・店舗可・広い土地",
     href: "/business",

@@ -17,6 +17,9 @@ export default function Header() {
           <Link href="/cheap-rent" className="hover:text-green-700">
             格安賃貸
           </Link>
+          <Link href="/auction" className="hover:text-green-700">
+            競売・公売
+          </Link>
           <Link href="/search" className="hover:text-green-700">
             検索
           </Link>
