@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "scrape:pipeline": "node scripts/scrape-pipeline.js",
+    "export:listings": "python3 scripts/export-from-db.py"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.1",
@@ -21,6 +23,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "playwright": "^1.58.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
